@@ -1,6 +1,18 @@
 $(document).ready(function() {
   $('#formulario').submit(function(event) {
     event.preventDefault();
+    console.log("hola");
+    if(validacioncita()!= ""){
+      swal("Error de Formulario", validacioncita(), "error");
+    }else{
+      swal("Envio Correceto", "Nos pondremos en contacto con usted", "success");
+  }
+    
+    
+  });
+
+  function validacioncita(){
+    var html= "";
     var nombreyapellido = $('#txtnombreyapellido').val();
     var telefono = $('#txtNumero').val();
     var email = $('#txtemail').val();
@@ -11,27 +23,23 @@ $(document).ready(function() {
 
     if (!regNombre.test(nombreyapellido)) {
       alert('Ingrese un nombre válido');
-      return false;
     }
 
     if (!regTelefono.test(telefono)) {
       alert('Ingrese un número de teléfono válido');
-      return false;
+
     }
 
     if (!regEmail.test(email)) {
       alert('Ingrese un email válido');
-      return false;
     }
 
-    if (ciudad == '0') {
-      alert('Seleccione una ciudad');
-      return false;
+    if (ciudad == "0") {
+      html += "Ingrese una ciudad ";
     }
+    return html;
+  }
 
-    alert('Formulario enviado correctamente');
-    $('#formulario')[0].reset(); // limpiar el formulario
-  });
 });
 
 
